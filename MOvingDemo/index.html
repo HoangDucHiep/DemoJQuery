@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Move and Copy Lab Page - jQuery in Action, 3rd edition</title>
+        <link rel="stylesheet" href="../css/main.css" />
+        <style>
+            #source-pane img {
+                margin-bottom: 1em;
+            }
+
+            .target {
+                border: 1px solid maroon;
+                background-color: #ffffcc;
+                margin-bottom: 1em;
+            }
+
+            #controls div {
+                margin-bottom: 0.5em;
+            }
+
+            button {
+                margin-top: 10px;
+            }
+
+            #button-restore {
+                display: none;
+            }
+
+            .done input[type="checkbox"],
+            .done #button-execute {
+                display: none;
+            }
+
+            #button-restore {
+                display: inline;
+            }
+
+            .remove-item
+            {
+                min-height: 10px;
+                background-color: yellow;
+                padding: 5px !important;
+            }
+        </style>
+    </head>
+
+    <body>
+        <h1 class="header">jQuery Move and Copy Lab Page</h1>
+
+        <div id="source-pane" class="box-small">
+            <h2>Sources</h2>
+            <div>
+                <input type="checkbox" name="sources" /><br />
+                <img
+                    class="zoomable source"
+                    src="../img/image.2.jpg"
+                    alt="source 1"
+                />
+            </div>
+
+            <div>
+                <input type="checkbox" name="sources" /><br />
+                <img
+                    class="zoomable source"
+                    src="../img/image.3.jpg"
+                    alt="source 2"
+                />
+            </div>
+
+            <div>
+                <input type="checkbox" name="sources" /><br />
+                <img
+                    class="zoomable source"
+                    src="../img/image.4.jpg"
+                    alt="source 3"
+                />
+            </div>
+
+            <div>
+                <input type="checkbox" name="sources" id="all-source" />All
+                Source<br />
+            </div>
+
+            <h2>Remove Areas</h2>
+            <div>
+                <div id="remove-pane" >
+                    <div id="parent" class="remove-item">
+                        <label for="parentcheck">
+                            parent
+                            <input type="checkbox" id="parentcheck" />
+                        </label>
+                        <div id="child1" class="remove-item"> 
+                            &nbsp;&nbsp;&nbsp;<label for="child1check">
+                                child1
+                                <input type="checkbox" id="child1check" />
+                            </label>
+                        </div>
+                        <div id="child2" class="remove-item">
+                            &nbsp;&nbsp;&nbsp;<label for="child2check">
+                                child2
+                                <input type="checkbox" id="child2check" />
+                            </label>
+
+                            <div id="grandchild1" class="remove-item">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label
+                                    for="grandchild1check"
+                                >
+                                    grandchild1
+                                    <input
+                                        type="checkbox"
+                                        id="grandchild1check"
+                                    />
+                                </label>
+                            </div>
+                            <div id="grandchild2" class="remove-item">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label
+                                    for="grandchild2check"
+                                >
+                                    grandchild2
+                                    <input
+                                        type="checkbox"
+                                        id="grandchild2check"
+                                    />
+                                </label>
+                            </div>
+                        </div>
+                        <div id="child3" class="remove-item">
+                            &nbsp;&nbsp;&nbsp;<label for="child3check">
+                                child3
+                                <input type="checkbox" id="child3check" />
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="box-small">
+            <h2>Target Areas</h2>
+
+            <div>
+                <div id="target-pane">
+                    <div id="target1" class="target" class="target">
+                        <label
+                            ><input type="checkbox" name="targets" /> Target
+                            1</label
+                        >
+                    </div>
+
+                    <div id="target2" class="target" class="target">
+                        <label
+                            ><input type="checkbox" name="targets" /> Target
+                            2</label
+                        >
+                    </div>
+
+                    <div id="target3" class="target" class="target">
+                        <label
+                            ><input type="checkbox" name="targets" /> Target
+                            3</label
+                        >
+                    </div>
+
+                    <div>
+                        <span>Operation:</span><br />
+                        <label
+                            ><input
+                                type="radio"
+                                name="operations"
+                                value="append"
+                                checked="checked"
+                            />
+                            append</label
+                        >
+                        <label
+                            ><input
+                                type="radio"
+                                name="operations"
+                                value="prepend"
+                            />
+                            prepend</label
+                        >
+                        <label
+                            ><input
+                                type="radio"
+                                name="operations"
+                                value="before"
+                            />
+                            before</label
+                        >
+                        <label
+                            ><input
+                                type="radio"
+                                name="operations"
+                                value="after"
+                            />
+                            after</label
+                        >
+                        <label
+                            ><input
+                                type="radio"
+                                name="operations"
+                                value="wrap"
+                            />
+                            wrap</label
+                        >
+                        <label
+                            ><input
+                                type="radio"
+                                name="operations"
+                                value="insertBefore"
+                            />
+                            insertBefore</label
+                        >
+                        <label
+                            ><input
+                                type="radio"
+                                name="operations"
+                                value="insertAfter"
+                            />
+                            insertAfter</label
+                        >
+
+                        <label
+                            ><input
+                                type="radio"
+                                name="operations"
+                                value="replaceWith"
+                            />
+                            replaceWith</label
+                        >
+
+                        <label
+                            ><input
+                                type="radio"
+                                name="operations"
+                                value="replaceAll"
+                            />
+                            replaceAll</label
+                        >
+
+                        
+                    </div>
+                    <div>
+                        <span>Clone?:</span><br />
+                        <label
+                            ><input
+                                type="radio"
+                                name="clone"
+                                value="no"
+                                checked="checked"
+                            />
+                            no</label
+                        >
+                        <label
+                            ><input
+                                type="radio"
+                                name="clone"
+                                value="yesWithEvent"
+                            />
+                            Yes with event</label
+                        >
+                        <label
+                            ><input
+                                type="radio"
+                                name="clone"
+                                value="yesWithoutEvent"
+                            />
+                            Yes without event</label
+                        >
+                    </div>
+                    
+                    <div>
+                        <br /><span>Remove:</span><br />
+                        <label
+                            ><input
+                                type="radio"
+                                name="operations"
+                                value="empty"
+                            />
+                            empty</label
+                        >
+
+                        <label
+                            ><input
+                                type="radio"
+                                name="operations"
+                                value="remove"
+                            />
+                            remove</label
+                        >
+                    </div>
+                </div>
+
+                <div>
+                    <button id="button-execute">Execute</button>
+                    <button id="button-restore">Restore</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>jQuery Selectors Lab Page<br /></p>
+        </div>
+
+        <script src="../js/jquery-1.11.3.min.js"></script>
+        <script>
+            $(".zoomable").hover(
+                function () {
+                    $(this).css({
+                        transform: "scale(1.2)",
+                        transition: "transform 0.3s ease",
+                    });
+                },
+                function () {
+                    $(this).css({
+                        transform: "scale(1)",
+                        transition: "transform 0.3s ease",
+                    });
+                }
+            );
+
+            var $sourcePaneHtml = $("#source-pane").html();
+            var targetPaneHtml = $("#target-pane").html();
+            $("#button-restore").click(function () {
+                $("#source-pane").html($sourcePaneHtml);
+                $("#target-pane").html(targetPaneHtml);
+            });
+
+            $("#button-execute").click(function () {
+                var $sources = $("input:checked ~ img", "#source-pane");
+
+                if ($("#all-source").is(":checked")) {
+                    $sources = $(".source");
+                }
+
+                if ($("[name=clone]:checked").val() === "yesWithEvent") {
+                    $sources = $sources.clone(true);
+                } else if (
+                    $("[name=clone]:checked").val() === "yesWithoutEvent"
+                ) {
+                    $sources = $sources.clone(false);
+                }
+
+                var $targets = $(
+                    "input:checkbox:checked",
+                    "#target-pane"
+                ).parents(".target");
+                var operation = $("[name=operations]:checked").val();
+                $targets[operation]($sources);
+
+                //select right parent div with checked checkbox
+                var $remove = $("#remove-pane input:checked");
+                // Find the closest parent div of each checked input
+                $remove = $remove.closest('div');
+                // Remove the parent divs
+                $remove[operation]();
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>
+            jQuery Operations Lab Page - jQuery in Action, 3rd edition
+        </title>
+        <link rel="stylesheet" href="../css/main.css" />
+        <style>
+            #results-pane {
+                margin-top: 1em;
+            }
+
+            #resulting-elements-count {
+                font-weight: bold;
+            }
+
+            #operation {
+                height: 4em;
+            }
+
+            #button-execute,
+            #button-restore {
+                vertical-align: top;
+            }
+
+            #frame {
+                width: 100%;
+                height: 660px;
+                border: none;
+            }
+
+            #sample-dom-source {
+                max-height: 40em;
+            }
+            .found-element {
+                transform: scale(1.02);
+                border: 2px solid #000000;
+                background-color: #dddddd;
+            }
+        </style>
+    </head>
+
+    <body>
+        <h1 class="header">jQuery Operations Lab Page</h1>
+
+        <div id="operation-pane" class="box-small">
+            <h2>Selector Panel</h2>
+            <form id="box-selector">
+                <p>
+                    Type a selector into the text field below and click the
+                    Apply button.
+                </p>
+
+                <label for="selector">Selector:</label>
+                <input type="text" id="selector" /><br />
+                <label for="context">Context:</label>
+                <input type="text" id="context" /><br />
+                <br />
+                <input type="submit" id="button-apply" value="Apply" />
+            </form>
+
+            <!-- <div id="box-results">
+                <div>
+                    <span>jQuery statement:</span>
+                    <span id="jquery-statement"></span>
+                </div>
+                <div>
+                    <span id="resulting-elements-count-selector">0</span> matching
+                    element(s):
+                    <div id="resulting-elements"></div>
+                </div>
+            </div> -->
+
+            <h2>Operation</h2>
+            <p>
+                Type any jQuery expression that results in a jQuery set into the
+                text field below and click the Execute button.
+            </p>
+            <p>
+                If you try to use get text(), html(), or val() methods, please use the following format:
+            </p>
+            <code>var result = $("selector").text();</code>
+
+            <form id="form-selector" action="#">
+                <label for="operation">Operation:</label><br />
+                <textarea id="operation"></textarea>
+
+                <input type="submit" id="button-execute" value="Execute" />
+                <input type="reset" id="button-restore" value="Restore" />
+            </form>
+
+            <div id="box-results">
+                <div>
+                    <span>jQuery statement:</span>
+                    <span id="jquery-statement"></span>
+                </div>
+                <div>
+                    <span id="resulting-elements-count">0</span> matching
+                    element(s):
+                    <div id="resulting-elements"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="sample-pane" class="box-small">
+            <h2>DOM Sample</h2>
+            <div id="sample-dom">
+                <span>Some images:</span>
+                <div>
+                    <img src="../img/image.1.jpg" id="animeGirl1" alt="cute" />
+                    <img src="../img/image.2.jpg" id="animeGirl2" alt="cute" />
+                    <img src="../img/image.3.jpg" id="animeGirl3" alt="cute" />
+                    <img src="../img/image.4.jpg" id="animeGirl4" alt="cute" />
+                    <img src="../img/image.5.jpg" id="animeGirl5" alt="cute" />
+                    <img src="../img/image.6.jpg" id="animeGirl6" alt="cute" />
+                    <img src="../img/image.7.jpg" id="animeGirl7" alt="cute" />
+                    <img src="../img/image.8.jpg" id="animeGirl8" alt="cute" />
+                    <img src="../img/image.9.jpg" id="animeGirl9" alt="cute" />
+                    <img
+                        src="../img/image.10.jpg"
+                        id="animeGirl10"
+                        alt="cute"
+                        style="display: none"
+                    />
+                </div>
+
+                <div id="some-div">
+                    This is a &lt;div&gt; with an id of <code>some-div</code>
+                </div>
+
+                <h2>Hello, I'm a &lt;h2&gt; element</h2>
+                <p>I'm a paragraph, nice to meet you.</p>
+
+                <div class="grandparent">
+                    grandparent
+                    <div class="parent">
+                        &nbsp;&nbsp;&nbsp;&nbspparent
+                        <div class="child">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; child
+                            <div class="subchild">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;subchild
+                            </div>
+                        </div>
+                    </div>
+                    <div class="surrogateParent1">
+                        &nbsp;&nbsp;&nbsp;surrogateParent1
+                    </div>
+                    <div class="surrogateParent2">
+                        &nbsp;&nbsp;&nbsp;surrogateParent2
+                    </div>
+                </div>
+
+                <ul class="my-list">
+                    <li>
+                        <a href="http://jquery.com">jQuery website</a>
+                        <ul>
+                            <li><a href="#css1">CSS1</a></li>
+                            <li><a href="#css2">CSS2</a></li>
+                            <li><a href="#css3">CSS3</a></li>
+                            <li>Basic XPath</li>
+                        </ul>
+                    </li>
+                    <li>
+                        jQuery also supports
+                        <ul>
+                            <li>Custom selectors</li>
+                            <li>Form selectors</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <table id="languages">
+                    <thead>
+                        <tr>
+                            <th>Language</th>
+                            <th>Type</th>
+                            <th>Invented</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Java</td>
+                            <td>Static</td>
+                            <td>1995</td>
+                        </tr>
+                        <tr>
+                            <td>Ruby</td>
+                            <td>Dynamic</td>
+                            <td>1993</td>
+                        </tr>
+                        <tr>
+                            <td>Smalltalk</td>
+                            <td>Dynamic</td>
+                            <td>1972</td>
+                        </tr>
+                        <tr>
+                            <td>C++</td>
+                            <td>Static</td>
+                            <td>1983</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <form id="form-fake" action="#">
+                    <div>
+                        <label for="text-field">Text:</label>
+                        <input type="text" id="text-field" name="text-field" />
+                    </div>
+                    <div>
+                        <span>Radio group:</span>
+                        <label
+                            ><input
+                                type="radio"
+                                name="radio-group"
+                                id="radio-a"
+                                value="A"
+                            />
+                            A</label
+                        >
+                        <label
+                            ><input
+                                type="radio"
+                                name="radio-group"
+                                id="radio-b"
+                                value="B"
+                                checked="checked"
+                            />
+                            B</label
+                        >
+                        <label
+                            ><input
+                                type="radio"
+                                name="radio-group"
+                                id="radio-c"
+                                value="C"
+                            />
+                            C</label
+                        >
+                    </div>
+                    <div>
+                        <span>Checkboxes:</span>
+                        <label
+                            ><input
+                                type="checkbox"
+                                name="checkboxes"
+                                id="checkbox-1"
+                                value="1"
+                            />
+                            1</label
+                        >
+                        <label
+                            ><input
+                                type="checkbox"
+                                name="checkboxes"
+                                id="checkbox-2"
+                                value="2"
+                            />
+                            2</label
+                        >
+                        <label
+                            ><input
+                                type="checkbox"
+                                name="checkboxes"
+                                id="checkbox-3"
+                                value="3"
+                                checked="checked"
+                            />
+                            3</label
+                        >
+                        <label
+                            ><input
+                                type="checkbox"
+                                name="checkboxes"
+                                id="checkbox-4"
+                                value="4"
+                            />
+                            4</label
+                        >
+                    </div>
+                    <input type="submit" id="button-submit" value="Submit" />
+                </form>
+            </div>
+        </div>
+
+        <div>
+            <h2>DOM Sample Code</h2>
+            <pre id="sample-dom-source">
+&lt;span&gt;Some images:&lt;/span&gt;
+&lt;div&gt;
+    &lt;img src="../img/image.1.jpg" id="animeGirl1" alt="cute"/&gt;
+    &lt;img src="../img/image.2.jpg" id="animeGirl2" alt="cute"/&gt;
+    &lt;img src="../img/image.3.jpg" id="animeGirl3" alt="cute"/&gt;
+    &lt;img src="../img/image.4.jpg" id="animeGirl4" alt="cute"/&gt;
+    &lt;img src="../img/image.5.jpg" id="animeGirl5" alt="cute"/&gt;
+    &lt;img src="../img/image.6.jpg" id="animeGirl6" alt="cute"/&gt;
+    &lt;img src="../img/image.7.jpg" id="animeGirl7" alt="cute"/&gt;
+    &lt;img src="../img/image.8.jpg" id="animeGirl8" alt="cute"/&gt;
+    &lt;img src="../img/image.9.jpg" id="animeGirl9" alt="cute"/&gt;
+    &lt;img src="../img/image.10.jpg" id="animeGirl10" alt="cute" style="display: none;"/&gt;
+&lt;/div&gt;
+
+
+&lt;div id="some-div"&gt;This is a &amp;lt;div&amp;gt; with an id of &lt;code&gt;some-div&lt;/code&gt;&lt;/div&gt;
+
+&lt;h2&gt;Hello, I'm a &amp;lt;h2&amp;gt; element&lt;/h2&gt;
+
+&lt;div class="grandparent"&gt;grandparent
+    &lt;div class="parent"&gt;parent
+        &lt;div class="child"&gt;child
+            &lt;div class="subchild"&gt;subchild&lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="surrogateParent1"&gt;surrogateParent1&lt;/div&gt;
+    &lt;div class="surrogateParent2"&gt;surrogateParent2&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;
+   I'm a paragraph, nice to meet you.
+&lt;/p&gt;
+
+&lt;ul class="my-list"&gt;
+   &lt;li&gt;
+      &lt;a href="http://jquery.com"&gt;jQuery website&lt;/a&gt;
+      &lt;ul&gt;
+         &lt;li&gt;&lt;a href="#css1"&gt;CSS1&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href="#css2"&gt;CSS2&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href="#css3"&gt;CSS3&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;Basic XPath&lt;/li&gt;
+      &lt;/ul&gt;
+   &lt;/li&gt;
+   &lt;li&gt;
+      jQuery also supports
+      &lt;ul&gt;
+         &lt;li&gt;Custom selectors&lt;/li&gt;
+         &lt;li&gt;Form selectors&lt;/li&gt;
+      &lt;/ul&gt;
+   &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;table id="languages"&gt;
+   &lt;thead&gt;
+   &lt;tr&gt;
+      &lt;th&gt;Language&lt;/th&gt;
+      &lt;th&gt;Type&lt;/th&gt;
+      &lt;th&gt;Invented&lt;/th&gt;
+   &lt;/tr&gt;
+   &lt;/thead&gt;
+   &lt;tbody&gt;
+   &lt;tr&gt;
+      &lt;td&gt;Java&lt;/td&gt;
+      &lt;td&gt;Static&lt;/td&gt;
+      &lt;td&gt;1995&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+      &lt;td&gt;Ruby&lt;/td&gt;
+      &lt;td&gt;Dynamic&lt;/td&gt;
+      &lt;td&gt;1993&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+      &lt;td&gt;Smalltalk&lt;/td&gt;
+      &lt;td&gt;Dynamic&lt;/td&gt;
+      &lt;td&gt;1972&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+      &lt;td&gt;C++&lt;/td&gt;
+      &lt;td&gt;Static&lt;/td&gt;
+      &lt;td&gt;1983&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;form id="form-fake" action="#"&gt;
+   &lt;div&gt;
+      &lt;label for="text-field"&gt;Text:&lt;/label&gt;
+      &lt;input type="text" id="text-field" name="text-field"/&gt;
+   &lt;/div&gt;
+   &lt;div&gt;
+      &lt;span&gt;Radio group:&lt;/span&gt;
+      &lt;label&gt;&lt;input type="radio" name="radio-group" id="radio-a" value="A"/&gt; A&lt;/label&gt;
+      &lt;label&gt;&lt;input type="radio" name="radio-group" id="radio-b" value="B" checked="checked"/&gt; B&lt;/label&gt;
+      &lt;label&gt;&lt;input type="radio" name="radio-group" id="radio-c" value="C"/&gt; C&lt;/label&gt;
+   &lt;/div&gt;
+   &lt;div&gt;
+      &lt;span&gt;Checkboxes:&lt;/span&gt;
+      &lt;label&gt;&lt;input type="checkbox" name="checkboxes" id="checkbox-1" value="1"/&gt; 1&lt;/label&gt;
+      &lt;label&gt;&lt;input type="checkbox" name="checkboxes" id="checkbox-2" value="2"/&gt; 2&lt;/label&gt;
+      &lt;label&gt;&lt;input type="checkbox" name="checkboxes" id="checkbox-3" value="3" checked="checked"/&gt; 3&lt;/label&gt;
+      &lt;label&gt;&lt;input type="checkbox" name="checkboxes" id="checkbox-4" value="4"/&gt; 4&lt;/label&gt;
+   &lt;/div&gt;
+   &lt;input type="submit" id="button-submit" value="Submit" /&gt;
+&lt;/form&gt;
+         </pre
+            >
+        </div>
+
+        <div class="footer">
+            <p>
+                jQuery Selectors Lab Page<br />
+            </p>
+        </div>
+
+        <script src="../js/jquery-1.11.3.min.js"></script>
+        <script src="../js/selectors.js"></script>
+
+        <script>
+            $("#sample-dom-source").text($("#sample-dom").html());
+
+            $("#form-selector").submit(function (event) {
+                event.preventDefault();
+
+                $("#resulting-elements").html("");
+                var operation = $.trim($("#operation").val());
+
+                let index = operation.indexOf(")");
+                operation = operation.slice(0, index) + ', "#sample-dom"' + operation.slice(index);
+
+                if (operation.length == 0) {
+                    return false;
+                }
+
+                var $set = perform(operation);
+                $("#resulting-elements-count").text($set.length);
+                $set.each(function () {
+                    $("#resulting-elements").append(
+                        "<div>" +
+                            this.tagName +
+                            (this.id ? "#" + this.id : "") +
+                            "</div>"
+                    );
+                });
+            });
+
+            $("#button-restore").click(function () {
+                $("#sample-dom").html($("#sample-dom-source").text());
+                $("#resulting-elements-count").text(0);
+                $("#resulting-elements").empty();
+            });
+
+
+            function perform(operation) {
+                $("*").removeClass("found-element");
+
+                let isGet = operation.includes("=");
+                if (isGet) {
+                    operation = operation.slice(operation.indexOf("=") + 1);
+                }
+                
+
+                console.log(operation);
+
+                eval("var $set=" + operation + ";");
+
+                if(isGet) {
+                    alert("result: " + $set);
+                }
+                
+                
+                $set.addClass("found-element");
+                return $set;
+            }
+        </script>
+
+        
+    </body>
+</html>
